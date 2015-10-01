@@ -1,0 +1,21 @@
+\contentsline {chapter}{Abstract}{ii}{dummy.6}
+\vspace {1em}
+\contentsline {chapter}{Acknowledgements}{iii}{dummy.7}
+\vspace {1em}
+\contentsline {chapter}{Contents}{iv}{dummy.8}
+\contentsline {chapter}{List of Figures}{v}{dummy.10}
+\contentsline {chapter}{List of Tables}{vi}{dummy.12}
+\contentsline {chapter}{Abbreviations}{vii}{dummy.14}
+\contentsline {chapter}{Physical Constants}{viii}{dummy.17}
+\contentsline {chapter}{Symbols}{ix}{dummy.20}
+\vspace {2em}
+\contentsline {chapter}{\numberline {1}KODOMO Latex usage}{1}{chapter.23}
+\contentsline {section}{\numberline {1.1}Introduction}{1}{section.24}
+\contentsline {section}{\numberline {1.2}Basic figure}{1}{section.25}
+\contentsline {subsection}{\numberline {1.2.1}Basic reference}{2}{subsection.27}
+\contentsline {subsection}{\numberline {1.2.2}Basic citation}{2}{subsection.28}
+\contentsline {section}{\numberline {1.3}In Closing}{3}{section.29}
+\vspace {2em}
+\contentsline {chapter}{\numberline {A}Appendix Title Here}{4}{appendix.30}
+\vspace {2em}
+\contentsline {chapter}{Bibliography}{5}{dummy.31}
