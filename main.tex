@@ -64,6 +64,24 @@
     citecolor={green!50!black},
     urlcolor={blue!50!black}
 }
+\usepackage{mwe}
+\usepackage{subfig}
+% Quote
+\usepackage{csquotes}
+% Algorithm
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+\makeatletter
+\def\BState{\State\hskip-\ALG@thistlm}
+\makeatother
+
+% Index
+\usepackage{makeidx}
+\makeindex
+% Abbreviation
+\newcommand{\etal}{\textit{et al}.\ }		% with the other authors
+\newcommand{\ie}{\textit{i}.\textit{e}.\ }	% in the other word
+\newcommand{\eg}{\textit{e}.\textit{g}.\ }	% for example
 
 
 %----------------------------------------------------------------------------------------
@@ -374,5 +392,15 @@ $\omega$ & angular frequency & rads$^{-1}$ \\
 \bibliographystyle{unsrtnat} % Use the "unsrtnat" BibTeX style for formatting the Bibliography
 
 \bibliography{Bibliography} % The references (bibliography) information are stored in the file named "Bibliography.bib"
+
+
+%----------------------------------------------------------------------
+%	Index
+%----------------------------------------------------------------------
+\label{Index}
+
+\clearpage
+\addcontentsline{toc}{chapter}{Index}
+\printindex
 
 \end{document}  
