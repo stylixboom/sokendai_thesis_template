@@ -95,8 +95,9 @@
 \rhead[\fancyplain{}{\sl{\leftmark}}]{\rm\thepage}
 \chead{}\lfoot{}\rfoot{}\cfoot{}
 \pagestyle{fancy}
-\renewcommand{\chaptermark}[1]{\btypeout{\thechapter\space #1}\markboth{\@chapapp\ \thechapter\ #1}{\@chapapp\ \thechapter\ #1}}
-\renewcommand{\sectionmark}[1]{}
+% Siriwat - Fixed the fancy header for doubled page.
+\renewcommand{\chaptermark}[1]{\btypeout{\thechapter.\space \emph{#1}}\markboth{\@chapapp\ \thechapter.\ \emph{#1}}{}}
+\renewcommand{\sectionmark}[1]{\markright{\emph{#1}}{}}
 \renewcommand{\subsectionmark}[1]{}
 \def\cleardoublepage{\clearpage\if@twoside \ifodd\c@page\else
 \hbox{}
