@@ -1,11 +1,11 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 % SOKENDAI Thesis template
-% Version 1.0 (2 April 2015)
+% Version 2.0 (1 February 2016)
 %
 % Modified by:
 % Siriwat Kasamwattanarote
-% http://www.satoh-lab.nii.ac.jp/~stylix/dl/sokendai_thesis_template_v1.zip
+% http://www.satoh-lab.nii.ac.jp/~stylix/dl/sokendai_thesis_template_v2.zip
 %
 % Please make sure to modify your name, thesis title, supervisor!!
 % in >>>> Thesis.cls <<<< file
@@ -13,6 +13,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Modified from..
 % Masters/Doctoral Thesis 
 % LaTeX Template
 % Version 1.43 (17/5/14)
@@ -40,34 +41,48 @@
 %----------------------------------------------------------------------------------------
 %	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
 %----------------------------------------------------------------------------------------
-\documentclass[11pt, oneside]{Thesis} % The default font size and one-sided printing (no margin offsets)
+\documentclass[11pt, twoside]{Thesis} % The default font size and one-sided printing (no margin offsets)
 
 \usepackage[square, numbers, comma, sort&compress]{natbib} % Use the natbib reference package - read up on this to edit the reference style; if you want text (e.g. Smith et al., 2012) for the in-text references (instead of numbers), remove 'numbers' 
 \title{\ttitle} % Defines the thesis title - don't touch this
 
 % Siriwat Configurations
+% Solved problem with ligatures e.g. cannot search for "find" as fi is a ligature
+% http://tex.stackexchange.com/questions/67848/can-pdf-search-find-words-with-ligatures-in-xelatex-documents
+\usepackage{lmodern}
 % Font
 \usepackage[utf8]{inputenc}
 % Support Japanese Text
 \usepackage[whole]{bxcjkjatype}
 
+
 \usepackage{tabto}
 % Figure
 \graphicspath{{Figures/}} % Specifies the directory where pictures are stored
-\DeclareGraphicsExtensions{.pdf,.jpeg,.jpg,.png,.bmp}
+\DeclareGraphicsExtensions{.pdf,.jpeg,.jpg,.jpe,.png,.bmp}
+
+%Rotate
+\usepackage{adjustbox}
+
 % Clickable Link, Ref
 \usepackage{hyperref}
 \usepackage{xcolor}
 \hypersetup{
-    colorlinks,
-    linkcolor={black!50!black},
-    citecolor={green!50!black},
-    urlcolor={blue!50!black}
+	colorlinks,
+	linkcolor={black!50!black},
+	citecolor={green!50!black},
+	urlcolor={blue!50!black}
 }
 \usepackage{mwe}
 \usepackage{subfig}
 % Quote
 \usepackage{csquotes}
+% Inspirational Quote for each chapter
+\usepackage{epigraph}
+\renewcommand{\epigraphsize}{\small\itshape}
+\setlength\epigraphwidth{8cm}
+\setlength\epigraphrule{0pt}
+
 % Algorithm
 \usepackage{algorithm}
 \usepackage[noend]{algpseudocode}
@@ -75,24 +90,81 @@
 \def\BState{\State\hskip-\ALG@thistlm}
 \makeatother
 
+% Abbreviation
+\newcommand{\etc}{etc.\ }			% shown as etc.,
+\newcommand{\etal}{et al.\ }		% with the other authors	--> shown as et al.
+\newcommand{\ie}{i.e.,\ }			% in the other word			--> shown as i.e.,
+\newcommand{\eg}{e.g.,\ }			% for example				--> shown as e.g.,
+
+%----------------------------------------
+% Chapter page style
+%----------------------------------------
+\makeatletter
+\def\@makechapterhead#1{%
+	\vspace*{50\p@}%
+	{\parindent \z@ \raggedleft
+		\normalfont
+		\ifnum \c@secnumdepth >\m@ne
+		\if@mainmatter
+		\huge\bfseries \@chapapp {\vskip 0\p@ \resizebox{0.12\textwidth}{!}{\thechapter}}
+		\par\nobreak
+		\vskip 20\p@
+		\fi
+		\fi
+		\interlinepenalty\@M
+		\Huge \bfseries #1\par\nobreak
+		\vskip 40\p@
+	}}
+	\def\@schapter#1{\if@twocolumn
+		\@topnewpage[\@makeschapterhead{#1}]%
+		\else
+		\@makeschapterhead{#1}%
+		\@afterheading
+		\fi}
+	\def\@makeschapterhead#1{%
+		\vspace*{50\p@}%
+		{\parindent \z@ \raggedleft
+			\normalfont
+			\interlinepenalty\@M
+			\Huge \bfseries  #1\par\nobreak
+			\vskip 40\p@
+		}}
+%----------------------------------------
+
+% Force the page start on the left-side of the doubled page document
+%\AtEndDocument{\cleardoublepage}
+\AtEndDocument{% based on \cleardoublepage
+	\clearpage
+	\ifodd\value{page}\else
+	\thispagestyle{empty}%
+	\hbox{}\newpage
+	\fi
+}
+
+% Page counter
+\usepackage{lastpage}
+
 % Index
+% Some known bug on clicking an Index from TOC cannot not go to the Index page
+% And clicking the indexed word cannot to back to the correct page
+% But page number is correct.
 \usepackage{makeidx}
 \makeindex
-% Abbreviation
-\newcommand{\etal}{\textit{et al}.\ }		% with the other authors
-\newcommand{\ie}{\textit{i}.\textit{e}.\ }	% in the other word
-\newcommand{\eg}{\textit{e}.\textit{g}.\ }	% for example
+\usepackage[totoc]{idxlayout}
+%\usepackage{imakeidx}
+%\makeindex[intoc]
 
 
-%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------
 %	DOCUMENT START
-%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------
 \begin{document}
 \frontmatter % Use roman page numbering style (i, ii, iii, iv...) for the pre-content pages
 
 \setstretch{1.3} % Line spacing of 1.3
 
 % Define the page headers using the FancyHdr package and set up for one-sided printing
+\fancyhf{}
 \fancyhead{} % Clears all page headers and footers
 \rhead{\thepage} % Sets the right side header to show the page number
 \lhead{} % Clears the left side page header
@@ -108,238 +180,46 @@
 \hypersetup{pdfkeywords=\keywordnames}
 
 
-
-%----------------------------------------------------------------------------------------
-%	TITLE PAGE
-%----------------------------------------------------------------------------------------
-\begin{titlepage}
-\begin{center}
-\vfill
-
-\HRule \\[0.4cm] % Horizontal line
-{\huge \bfseries \ttitle}\\[0.4cm] % Thesis title
-\HRule \\[1.5cm] % Horizontal line
- 
-\begin{minipage}{0.4\textwidth}
-\begin{flushleft} \large
-\emph{Author:}\\
-\authornames % Author name - remove the \href bracket to remove the link
-\end{flushleft}
-\end{minipage}
-\begin{minipage}{0.4\textwidth}
-\begin{flushright} \large
-\emph{Supervisor:} \\
-\supname % Supervisor name - remove the \href bracket to remove the link  
-\end{flushright}
-\end{minipage}\\[4.5cm]
- 
-\textsc{\Large \degreename}\\[4.5cm] % Thesis type
- 
-\large \deptname\\
-\facname\\
-\univname\\[2cm] % University requirement text
- 
-{\large \today}\\[2.5cm] % Date
-\includegraphics[width=0.1\textwidth]{misc/sokendai} % University/department logo - uncomment to place it
- \examname
-\vfill
-\end{center}
-\end{titlepage}
+%----------------------------------------------------------------------
+%	Content headers
+%----------------------------------------------------------------------
+\input{Headers/title}			% Title page
+%\input{Headers/declaration}	% Declaration page
+\input{Headers/committee}		% Committee info page
+\input{Headers/quote}			% Quotation page
+\input{Headers/acknowledgement}	% Acknowledgement page
+\input{Headers/abstract}		% Abstract page
+\input{Headers/toc}				% Table of content/figure/table page
+\input{Headers/abbreviation}	% Abbreviation page
+%\input{Headers/physical_const}	% Physical constants and definitions
+%\input{Headers/symbol}			% Symbols
+\input{Headers/dedication}		% Dedication page
 
 
-
-%----------------------------------------------------------------------------------------
-%	DECLARATION PAGE
-%	Your institution may give you a different text to place here
-%----------------------------------------------------------------------------------------
-
-%\Declaration{
-%
-%\addtocontents{toc}{\vspace{1em}} % Add a gap in the Contents, for aesthetics
-%
-%I, \authornames, declare that this thesis titled, '\ttitle' and the work presented in it are my own. I confirm that:
-%
-%\begin{itemize} 
-%\item[\tiny{$\blacksquare$}] This work was done wholly or mainly while in candidature for a research degree at this University.
-%\item[\tiny{$\blacksquare$}] Where any part of this thesis has previously been submitted for a degree or any other qualification at this University or any other institution, this has been clearly stated.
-%\item[\tiny{$\blacksquare$}] Where I have consulted the published work of others, this is always clearly attributed.
-%\item[\tiny{$\blacksquare$}] Where I have quoted from the work of others, the source is always given. With the exception of such quotations, this thesis is entirely my own work.
-%\item[\tiny{$\blacksquare$}] I have acknowledged all main sources of help.
-%\item[\tiny{$\blacksquare$}] Where the thesis is based on work done by myself jointly with others, I have made clear exactly what was done by others and what I have contributed myself.\\
-%\end{itemize}
-% 
-%Signed:\\
-%\rule[1em]{25em}{0.5pt} % This prints a line for the signature
-% 
-%Date:\\
-%\rule[1em]{25em}{0.5pt} % This prints a line to write the date
-%}
-%\clearpage % Start a new page
-
-
-
-%----------------------------------------------------------------------------------------
-%	COMMITTEE PAGE
-%----------------------------------------------------------------------------------------
-\begin{titlepage}
-\begin{large}
-\null\vfill
-\centering
-\textbf{A dissertation submitted to\deptname,\\
-\facname,\\
-\univname,\\
-in partial fulfillment of the requirements for the degree of\\
-\degreename}\\[2.5cm]
-
-\textbf{Advisory Committee}\\[0.5cm]
-\begin{enumerate}
-\item Prof. First \textsc{Last}
-	\tab{National Institute of Informatics,}\\
-	\tab{SOKENDAI}
-\item Assoc.Prof. First \textsc{Last}
-	\tab{First affiliation}\\
-	\tab{Second affiliation}
-\item Prof. First \textsc{Last}
-	\tab{First affiliation}
-\item Prof. First \textsc{Last}
-	\tab{First affiliation}
-\item Assoc.Prof. First \textsc{Last}
-	\tab{First affiliation}
-\end{enumerate}
-\null\vfill
-\end{large}
-\end{titlepage}
-
-
-
-%----------------------------------------------------------------------------------------
-%	QUOTATION PAGE
-%----------------------------------------------------------------------------------------
-\pagestyle{empty} % No headers or footers for the following pages
-
-\null\vfill % Add some space to move the quote down the page a bit
-
-\textit{``Do you have a quote to put?. Do you have a quote to put?. Do you have a quote to put?. Do you have a quote to put?. Do you have a quote to put?."}
-
-\begin{flushright}
-First Last.
-\end{flushright}
-
-\vfill\vfill\vfill\vfill\vfill\vfill\null % Add some space at the bottom to position the quote just right
-\clearpage % Start a new page
-
-
-
-%----------------------------------------------------------------------------------------
-%	ABSTRACT PAGE
-%----------------------------------------------------------------------------------------
-\addtotoc{Abstract} % Add the "Abstract" page entry to the Contents
-
-\abstract{\addtocontents{toc}{\vspace{1em}} % Add a gap in the Contents, for aesthetics
-
-This is an abstract. This is an abstract. This is an abstract. This is an abstract. This is an abstract. This is an abstract. This is an abstract. This is an abstract. This is an abstract. This is an abstract. This is an abstract. This is an abstract. This is an abstract. This is an abstract. This is an abstract. This is an abstract. This is an abstract. This is an abstract. This is an abstract. This is an abstract. This is an abstract. This is an abstract. This is an abstract. 
-
-This is an abstract. This is an abstract. This is an abstract. This is an abstract. This is an abstract. This is an abstract. This is an abstract. This is an abstract. This is an abstract. This is an abstract. This is an abstract. This is an abstract. This is an abstract. This is an abstract. This is an abstract. This is an abstract. This is an abstract. This is an abstract. This is an abstract. This is an abstract. This is an abstract. This is an abstract. This is an abstract. This is an abstract. This is an abstract. This is an abstract. This is an abstract. This is an abstract. This is an abstract. This is an abstract. This is an abstract. This is an abstract. This is an abstract. This is an abstract. This is an abstract. This is an abstract. 
-}
-\clearpage % Start a new page
-
-
-
-%----------------------------------------------------------------------------------------
-%	ACKNOWLEDGEMENTS
-%----------------------------------------------------------------------------------------
-\setstretch{1.3} % Reset the line-spacing to 1.3 for body text (if it has changed)
-
-\acknowledgements{\addtocontents{toc}{\vspace{1em}} % Add a gap in the Contents, for aesthetics
-
-The acknowledgements and the people to thank go here, don't forget to include your project advisor\ldots
-}
-\clearpage % Start a new page
-
-
-
-%----------------------------------------------------------------------------------------
-%	LIST OF CONTENTS/FIGURES/TABLES PAGES
-%----------------------------------------------------------------------------------------
-\pagestyle{fancy} % The page style headers have been "empty" all this time, now use the "fancy" headers as defined before to bring them back
-
-\lhead{\emph{Contents}} % Set the left side page header to "Contents"
-\tableofcontents % Write out the Table of Contents
-
-\lhead{\emph{List of Figures}} % Set the left side page header to "List of Figures"
-\listoffigures % Write out the List of Figures
-
-\lhead{\emph{List of Tables}} % Set the left side page header to "List of Tables"
-\listoftables % Write out the List of Tables
-
-
-
-%----------------------------------------------------------------------------------------
-%	ABBREVIATIONS
-%----------------------------------------------------------------------------------------
-\clearpage % Start a new page
-
-\setstretch{1.5} % Set the line spacing to 1.5, this makes the following tables easier to read
-
-\lhead{\emph{Abbreviations}} % Set the left side page header to "Abbreviations"
-\listofsymbols{ll} % Include a list of Abbreviations (a table of two columns)
-{
-\textbf{QE} & \textbf{Q}uery \textbf{E}xpansion \\
-\textbf{QB} & \textbf{Q}uery \textbf{B}ootstrapping \\
-\textbf{RANSAC} & \textbf{Ran}dom \textbf{Sa}mple \textbf{C}onsensus \\
-\textbf{SIFT} & \textbf{S}cale-\textbf{i}nvariant \textbf{F}eature \textbf{T}ransform  \\
-%\textbf{Acronym} & \textbf{W}hat (it) \textbf{S}tands \textbf{F}or \\
-}
-
-
-
-%----------------------------------------------------------------------------------------
-%	PHYSICAL CONSTANTS/OTHER DEFINITIONS
-%----------------------------------------------------------------------------------------
-\clearpage % Start a new page
-
-\lhead{\emph{Physical Constants}} % Set the left side page header to "Physical Constants"
-
-\listofconstants{lrcl} % Include a list of Physical Constants (a four column table)
-{
-Speed of Light & $c$ & $=$ & $2.997\ 924\ 58\times10^{8}\ \mbox{ms}^{-\mbox{s}}$ (exact)\\
-% Constant Name & Symbol & = & Constant Value (with units) \\
-}
-
-
-
-%----------------------------------------------------------------------------------------
-%	SYMBOLS
-%----------------------------------------------------------------------------------------
-\clearpage % Start a new page
-
-\lhead{\emph{Symbols}} % Set the left side page header to "Symbols"
-
-\listofnomenclature{lll} % Include a list of Symbols (a three column table)
-{
-$a$ & distance & m \\
-$P$ & power & W (Js$^{-1}$) \\
-% Symbol & Name & Unit \\
-
-& & \\ % Gap to separate the Roman symbols from the Greek
-
-$\omega$ & angular frequency & rads$^{-1}$ \\
-% Symbol & Name & Unit \\
-}
-
-
-
-%----------------------------------------------------------------------------------------
-%	DEDICATION
-%----------------------------------------------------------------------------------------
-\setstretch{1.3} % Return the line spacing back to 1.3
-
-\pagestyle{empty} % Page style needs to be empty for this page
-
-\dedicatory{To my family} % Dedication text
-
-\addtocontents{toc}{\vspace{2em}} % Add a gap in the Contents, for aesthetics
-
+%----------------------------------------
+% Chapter Header/Footer page styling
+%----------------------------------------
+% Ref:	https://www.sharelatex.com/learn/Headers_and_footers
+%		https://www.sharelatex.com/learn/Headers_and_footers#Reference_guide
+%	\leftmark
+%	adds name and number of the current top-level structure (for example, Chapter for reports and books classes; Section for articles ) in uppercase letters.
+%	\rightmark
+%	adds name and number of the current next to top-level structure (Section for reports and books; Subsection for articles) in uppercase letters.
+%	E for even page
+%	O for odd page
+%	L for left side
+%	C for centered
+%	R for right side
+%----------------------------------------
+\pagestyle{fancy} % Return the page headers back to the "fancy" style
+\fancyhead[LE]{\leftmark} % Page title
+\fancyhead[RE]{}
+\fancyhead[LO]{}				% Header for final submission
+\fancyhead[RO]{\rightmark}		% Header for final submission
+%\fancyhead[LO]{\rightmark}								% Header during writing
+%\fancyhead[RO]{\thepage\ of \pageref{LastPage}}		% Header during writing
+\fancyfoot[CE,CO]{}
+\fancyfoot[LE,RO]{\thepage}
 
 
 %----------------------------------------------------------------------------------------
@@ -347,19 +227,16 @@ $\omega$ & angular frequency & rads$^{-1}$ \\
 %----------------------------------------------------------------------------------------
 \mainmatter % Begin numeric (1,2,3...) page numbering
 
-\pagestyle{fancy} % Return the page headers back to the "fancy" style
-
 % Include the chapters of the thesis as separate files from the Chapters folder
 % Uncomment the lines as you write the chapters
 
-\input{Chapters/Chapter1}
-%\input{Chapters/Chapter2} 
-%\input{Chapters/Chapter3}
-%\input{Chapters/Chapter4} 
-%\input{Chapters/Chapter5} 
-%\input{Chapters/Chapter6} 
-%\input{Chapters/Chapter7} 
-
+\input{Chapters/chapter1}
+%\input{Chapters/chapter2} 
+%\input{Chapters/chapter3}
+%\input{Chapters/chapter4} 
+%\input{Chapters/chapter5} 
+%\input{Chapters/chapter6} 
+%\input{Chapters/chapter7} 
 
 
 %----------------------------------------------------------------------------------------
@@ -372,14 +249,13 @@ $\omega$ & angular frequency & rads$^{-1}$ \\
 % Include the appendices of the thesis as separate files from the Appendices folder
 % Uncomment the lines as you write the Appendices
 
-\input{Appendices/AppendixA}
-%\input{Appendices/AppendixB}
-%\input{Appendices/AppendixC}
+\input{Appendices/appendixA}
+%\input{Appendices/appendixB}
+%\input{Appendices/appendixC}
 
 \addtocontents{toc}{\vspace{2em}} % Add a gap in the Contents, for aesthetics
 
 \backmatter
-
 
 
 %----------------------------------------------------------------------------------------
@@ -399,8 +275,10 @@ $\omega$ & angular frequency & rads$^{-1}$ \\
 %----------------------------------------------------------------------
 \label{Index}
 
-\clearpage
-\addcontentsline{toc}{chapter}{Index}
+\lhead{\emph{Index}} % Change the page header to say "Index"
+
+%\clearpage
+%\addcontentsline{toc}{chapter}{\indexname}
 \printindex
 
 \end{document}  

@@ -189,7 +189,7 @@
 %-------------------------------------------------   
 \degree{Doctor of Philosophy} % Your degree name - this is currently used in the title page and abstract
 %-------------------------------------------------   
-\authors{First \textsc{Last}} % Your name - this is used in the title page and abstract
+\authors{Siriwat \textsc{Kasamwattanarote}} % Your name - this is used in the title page and abstract
 %-------------------------------------------------   
 \addresses{} % Your address - this is not currently used anywhere in the template, cite it with \addressnames if you want it
 %-------------------------------------------------   
