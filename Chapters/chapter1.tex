@@ -1,0 +1,101 @@
+% Chapter Template
+
+\chapter{KODOMO Latex usage} % Main chapter title
+
+\label{Chapter1}
+
+\epigraph{``A very simple Latex usage is here, especially to be a standard thesis template for SOKENDAI!"}{--- \textup{Siriwat K.}}
+
+%----------------------------------------------------------------------------------------
+%	SECTION 1
+%----------------------------------------------------------------------------------------
+\section{Introduction}
+\label{intro}
+First of all, welcome to Latex KODOMO guide. I will teach you very basic command that you can mimic. BUT, first I recommend you to download latex editor from here...\\ \\
+\textbf{Windows}:\\
+Prerequisite: MikTex \href{http://miktex.org/download}{http://miktex.org/download}\\
+Editor: Texstudio \href{http://texstudio.sourceforge.net/}{http://texstudio.sourceforge.net}\\
+\textbf{Mac/Ubuntu}:\\
+Prerequisite: TexLive\\
+Editor: Texstudio\\
+
+\newpage
+After you meet all requirements, now you have to modify these files first..\\
+\begin{enumerate}
+	\item Thesis.cls (Thesis title, your name, supervisor name)\\
+	\item main.tex (Main thesis source)\\
+	\item And the headers (.\textbackslash Header\textbackslash*.tex for the thesis header)\\
+\end{enumerate}
+
+\textbf{If you don't need some page, e.g. quote, just prefixing comment (\%) on that line!!}
+
+%----------------------------------------------------------------------------------------
+%	SECTION 2
+%----------------------------------------------------------------------------------------
+\section{Basic figure}
+\label{basic_fig}
+This is how to reference to your figure. For example... we are talking about the following Fig. \ref{fig:SampleFigure}.
+
+\begin{figure}[htbp]
+	\centering
+		\includegraphics[width=0.5\textwidth]{Figures/SampleFigure.pdf}
+	\caption[Figure title here (will appear in the list)]{Figure caption here (will appear under figure)}
+	\label{fig:SampleFigure}
+\end{figure}
+
+However, you have to prepare you image in .jpg, .png, .bmp, ... and the best is vector type image .pdf which can be exported from Word, Excel, Powerpoint.\\
+1. File\\
+2. Export to PDF/XLS\\
+
+
+
+%-----------------------------------
+%	SUBSECTION 1
+%-----------------------------------
+\subsection{Basic reference}
+\label{basic_ref}
+In order to reference, you have to use this command \textbf{\textbackslash ref\{your label here\} }. For example, as we described about how to insert figure, now we are talking about referencing (see section \ref{basic_fig}).
+
+
+
+%-----------------------------------
+%	SUBSECTION 2
+%-----------------------------------
+\subsection{Basic citation}
+\label{basic_cite}
+We normally need to cite another paper. To do that, we need this command \textbf{\textbackslash cite\{your bib key label here\}}. What is "bib"? It is an abbreviation Bibliography used in Latex. However, you need to create your references into the file "Bibliography.bib" before hand.
+
+For example, our previous works \cite{BibKeyLabel1,BibKeyLabel2}... The good thing of cite and ref with Latex is, all numbering is automatic, and you can also click!! \cite{BibKeyLabel3}.
+
+\clearpage % Start a new page
+
+
+%-----------------------------------
+%	SUBSECTION 3
+%-----------------------------------
+\subsection{Basic index}
+\label{basic_index}
+The index is located at the end of this thesis.
+In order to use it,
+you may need to put the \textbackslash index\{keyword\} command.
+And you will found your very-special-keyword \index{Very-special-keyword} will appear on the Index with the page number.
+By the way, please run MakeIndex command once, then compile your tex.
+\eg For TexStudio, MakeIndex is accessible by Tools~\textgreater~Commands~\textgreater~MakeIndex.
+
+\clearpage % Start a new page
+
+
+%----------------------------------------------------------------------------------------
+%	CLOSING
+%----------------------------------------------------------------------------------------
+\section{In Closing}
+\label{closing}
+You have reached the end of this mini-guide. This should be veeeeeryyy basic enough. Anyway, you can find more how to use Latex by Googling! e.g. how to do newline, new page, bold text, italic, etc.
+
+Good luck and have lots of fun!
+
+\begin{flushright}
+KODOMO Latex Guide written by ---\\
+\textbf{Siriwat Kasamwattanarote}\\ \href{http://www.satoh-lab.nii.ac.jp/~stylix}{www.satoh-lab.nii.ac.jp/\textasciitilde stylix}\\
+This template URL:\\ \href{http://www.satoh-lab.nii.ac.jp/~stylix/dl/sokendai_thesis_template_v1.zip}{www.satoh-lab.nii.ac.jp/\textasciitilde stylix/dl/sokendai\_thesis\_template\_v1.zip}
+\end{flushright}
