@@ -4,9 +4,7 @@
 
 \label{Chapter1}
 
-\lhead{Chapter 1. \emph{Basic Latex usage by Siriwat K.}}
-
-
+\epigraph{``A very simple Latex usage is here, especially to be a standard thesis template for SOKENDAI!"}{--- \textup{Siriwat K.}}
 
 %----------------------------------------------------------------------------------------
 %	SECTION 1
@@ -21,11 +19,15 @@ Editor: Texstudio \href{http://texstudio.sourceforge.net/}{http://texstudio.sour
 Prerequisite: TexLive\\
 Editor: Texstudio\\
 
-After you meet all requirements, now you have to modify these file first..\\
-1. Thesis.cls (Thesis title, your name, supervisor name)\\
-2. main.tex (Committee, quote, abstract, acknowledge,...)\\
+\newpage
+After you meet all requirements, now you have to modify these files first..\\
+\begin{enumerate}
+	\item Thesis.cls (Thesis title, your name, supervisor name)\\
+	\item main.tex (Main thesis source)\\
+	\item And the headers (.\textbackslash Header\textbackslash*.tex for the thesis header)\\
+\end{enumerate}
 
-\textbf{If you don't need some page, e.g. quote, just delete it!!}
+\textbf{If you don't need some page, e.g. quote, just prefixing comment (\%) on that line!!}
 
 %----------------------------------------------------------------------------------------
 %	SECTION 2
@@ -64,6 +66,21 @@ In order to reference, you have to use this command \textbf{\textbackslash ref\{
 We normally need to cite another paper. To do that, we need this command \textbf{\textbackslash cite\{your bib key label here\}}. What is "bib"? It is an abbreviation Bibliography used in Latex. However, you need to create your references into the file "Bibliography.bib" before hand.
 
 For example, our previous works \cite{BibKeyLabel1,BibKeyLabel2}... The good thing of cite and ref with Latex is, all numbering is automatic, and you can also click!! \cite{BibKeyLabel3}.
+
+\clearpage % Start a new page
+
+
+%-----------------------------------
+%	SUBSECTION 3
+%-----------------------------------
+\subsection{Basic index}
+\label{basic_index}
+The index is located at the end of this thesis.
+In order to use it,
+you may need to put the \textbackslash index\{keyword\} command.
+And you will found your very-special-keyword \index{Very-special-keyword} will appear on the Index with the page number.
+By the way, please run MakeIndex command once, then compile your tex.
+\eg For TexStudio, MakeIndex is accessible by Tools~\textgreater~Commands~\textgreater~MakeIndex.
 
 \clearpage % Start a new page
 
